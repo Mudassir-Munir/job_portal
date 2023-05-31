@@ -1,6 +1,14 @@
 //import
 
-const express = require("express");
+// common js
+//const express = require("express");
+
+// module js
+import express from "express";
+import dotenv from "dotenv";
+
+// dot Env config
+dotenv.config();
 
 // rest object
 const app = express();
@@ -10,9 +18,11 @@ app.get("/", (req, res) => {
    res.send("<h1>Welcome to Job Portal</h1>");
 });
 
+const port = process.env.PORT || 8000
+
 // listen
-app.listen(8000, () => {
-   console.log("Node server running on port 8000");
+app.listen(port, () => {
+   console.log(`Node server running in ${process.env.DEV_MODE} mode on port ${port}`);
 });
 
 
