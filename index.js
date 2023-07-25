@@ -11,9 +11,13 @@ import morgan from "morgan";
 
 //file imports
 import testRoutes from "./routes/testRouter.js"
+import connectDb from "./config/database.js";
 
 // dot Env config
 dotenv.config();
+
+// Database connection
+connectDb();
 
 // rest object
 const app = express();
