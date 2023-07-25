@@ -6,9 +6,13 @@
 // module js
 import express from "express";
 import dotenv from "dotenv";
+import connectDb from "./config/database.js";
 
 // dot Env config
 dotenv.config();
+
+// Database connection
+connectDb();
 
 // rest object
 const app = express();
