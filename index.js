@@ -10,8 +10,12 @@ import cors from "cors";
 import morgan from "morgan";
 
 //file imports
-import testRoutes from "./routes/testRouter.js"
 import connectDb from "./config/database.js";
+
+// routes import
+import testRoutes from "./routes/testRouter.js";
+import authRoutes from "./routes/authRoutes.js";
+
 
 // dot Env config
 dotenv.config();
@@ -34,6 +38,7 @@ app.use(morgan('dev'));
 //    res.send("<h1>Welcome to Job Portal</h1>");
 // });
 app.use("/api/v1/test", testRoutes);
+app.use("/api/v1/auth", authRoutes);
 
 const port = process.env.PORT || 8000
 
