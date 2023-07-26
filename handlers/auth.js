@@ -1,11 +1,15 @@
 import userModel from "../models/userModel.js";
 
-export const registerController = async (req, res) => {
+// need to pass middleware directly, if you need middleware inside handler.e.g next
+export const registerController = async (req, res, next) => {
     try {
           const {name, email, password, lastname} = req.body;
           //validations
           if (!name) {
-            return res.status(400).send({success: false, message: "please provide name"});
+             return res.status(400).send({success: false, message: "please provide name"});
+            // by error middleware
+            // next("please provide name")
+            // not using error middleware here because error status code is same for all errors i.e 500
           }
           if (!email) {
             return res.status(400).send({success: false, message: "please provide email"});
