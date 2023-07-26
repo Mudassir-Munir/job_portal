@@ -16,6 +16,8 @@ import connectDb from "./config/database.js";
 import testRoutes from "./routes/testRouter.js";
 import authRoutes from "./routes/authRoutes.js";
 
+//middleware import
+// import errorMiddleware from "./middlewares/errorMiddleware.js";
 
 // dot Env config
 dotenv.config();
@@ -37,8 +39,13 @@ app.use(morgan('dev'));
 // app.get("/", (req, res) => {
 //    res.send("<h1>Welcome to Job Portal</h1>");
 // });
+
+
 app.use("/api/v1/test", testRoutes);
 app.use("/api/v1/auth", authRoutes);
+
+// for using error middelware uncomment below line
+// app.use(errorMiddleware);
 
 const port = process.env.PORT || 8000
 
