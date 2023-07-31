@@ -12,7 +12,7 @@ const errorMiddleware = (err, req, res, next) => {
 
     // missing feilds errors i.e error name is ValidatorError
     if (err.name === "ValidatorError") {
-        console.log("here");
+       // console.log("here");
         defaultErrors.statusCode = 400;
         defaultErrors.message = Object.values(err.errors)
         .map((item) => item.message)
