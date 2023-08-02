@@ -47,3 +47,32 @@ export const registerController = async (req, res, next) => {
         });
     }
 }
+
+
+export const loginController = async function(req, res) {
+      const {email, password} = req.body;
+
+      if (!email || !password) {
+        return res.status(400).send({message:"please provide valid email and password"});
+      }
+
+      const user = await userModel.findOne({email}).select("+password");
+      if (!user) {
+        return res.status(500).send({message: "Invalid userName or password"});
+      }
+
+      const isMatched = await user.comparePassword(password);
+      if (!isMatched) {
+        return res.status(500).send({message: "Invalid username or password"});
+      }
+    
+      const token = user.createJWT();
+      user.password = undefined;
+      
+      res.status(200).json({
+        success: true,
+        message: "Login successfully",
+        user,
+        token
+      });
+}
