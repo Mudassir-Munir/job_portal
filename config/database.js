@@ -7,8 +7,7 @@ const connectDb = async () => {
             `Connected to mongo database ${mongoose.connection.host}`
         );
     } catch (error) {
-        console.log(`MongoDb error ${error}`
-        );
+        console.log(`MongoDb error: ${error}`);
     }
 };
 

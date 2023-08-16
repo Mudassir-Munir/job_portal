@@ -15,6 +15,8 @@ import connectDb from "./config/database.js";
 // routes import
 import testRoutes from "./routes/testRouter.js";
 import authRoutes from "./routes/authRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
+import jobRoutes from "./routes/jobRoutes.js";
 
 //middleware import
 // import errorMiddleware from "./middlewares/errorMiddleware.js";
@@ -43,6 +45,8 @@ app.use(morgan('dev'));
 
 app.use("/api/v1/test", testRoutes);
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/job", jobRoutes);
 
 // for using error middelware uncomment below line
 // app.use(errorMiddleware);
@@ -53,5 +57,3 @@ const port = process.env.PORT || 8000
 app.listen(port, () => {
    console.log(`Node server running in ${process.env.DEV_MODE} mode on port ${port}`);
 });
-
-
