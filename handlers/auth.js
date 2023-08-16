@@ -53,7 +53,7 @@ export const loginController = async function(req, res) {
       const {email, password} = req.body;
 
       if (!email || !password) {
-        return res.status(400).send({message:"please provide valid email and password"});
+        return res.status(401).send({message:"please provide valid email and password"});
       }
 
       const user = await userModel.findOne({email}).select("+password");
