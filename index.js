@@ -8,6 +8,10 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
+// security packages imports
+import helmet from "helmet";
+import xss from "xss-clean";
+import mongoSanitize from "express-mongo-sanitize";
 
 //file imports
 import connectDb from "./config/database.js";
@@ -31,6 +35,13 @@ connectDb();
 const app = express();
 
 //middlewares
+// helmet package is used for securing headers data
+app.use(helmet());
+// xss-clean package is used to prevent from cross site scripting attacks
+app.use(xss());
+// express-mongo-sanitize package is used to prevent mongodb from data injection
+app.use(mongoSanitize());
+
 app.use(express.json());
 // cors package is used for cross origin connection
 app.use(cors());
