@@ -3,6 +3,10 @@
 // common js
 //const express = require("express");
 
+// swagger documentation packages
+import swaggerUi from "swagger-ui-express";
+import swaggerDoc from "swagger-jsdoc";
+
 // module js
 import express from "express";
 import dotenv from "dotenv";
@@ -31,6 +35,26 @@ dotenv.config();
 // Database connection
 connectDb();
 
+// swagger api config
+const options = {
+   definition:{
+   openapi: "3.0.3",
+   info: {
+      title:"Job Portal Application",
+      description: "Node Express Js Job Portal Application",
+      version: "1.0.0",
+   },
+   servers: [
+      {
+       url: "http://localhost:8000",
+      },
+   ],
+   },
+   apis: ["./routes/*.js"],
+};
+
+const spec = swaggerDoc(options);
+
 // rest object
 const app = express();
 
@@ -41,7 +65,7 @@ app.use(helmet());
 app.use(xss());
 // express-mongo-sanitize package is used to prevent mongodb from data injection
 app.use(mongoSanitize());
-
+// use json
 app.use(express.json());
 // cors package is used for cross origin connection
 app.use(cors());
@@ -52,12 +76,13 @@ app.use(morgan('dev'));
 // app.get("/", (req, res) => {
 //    res.send("<h1>Welcome to Job Portal</h1>");
 // });
-
-
 app.use("/api/v1/test", testRoutes);
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/job", jobRoutes);
+
+// homeroute root
+app.use("/api-doc", swaggerUi.serve, swaggerUi.setup(spec));
 
 // for using error middelware uncomment below line
 // app.use(errorMiddleware);
